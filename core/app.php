@@ -1,8 +1,23 @@
 <?php
 
+use Symfony\Component\Debug\ErrorHandler;
+use Symfony\Component\Debug\ExceptionHandler;
+use Symfony\Component\HttpFoundation\Request;
+
 require_once __DIR__.'/config/config.php';
 
+ErrorHandler::register();
+ExceptionHandler::register();
+
 // Initialisation of the Database
+
+// Register JSON data decoder for JSON requests
+$app->before(function (Request $request) {
+    if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+        $data = json_decode($request->getContent(), true);
+        $request->request->replace(is_array($data) ? $data : array());
+    }
+});
 
 try{
     $app["connection"] = new PDO(

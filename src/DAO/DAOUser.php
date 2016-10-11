@@ -54,4 +54,22 @@ class DAOUser
         return $user;
     }
 
+    /**
+     * createUser()
+     * create a new user
+     * @param  User   $user the user to create
+     * @return User       created user with an id
+     */
+    public function createUser(User $user){
+        $sql="INSERT INTO User (name,email,age) values(?,?,?)";
+        $statementUser=$this->app["connection"]->prepare($sql);
+        $statementUser->execute(array(
+            $user->getName(),
+            $user->getEmail(),
+            $user->getAge()
+        ));
+        $user->setId($this->app["connection"]->lastInsertId());
+        return $user;
+    }
+
 }
