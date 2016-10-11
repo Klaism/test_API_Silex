@@ -1,5 +1,6 @@
-#Test Api Silex#
-##Installation##
+# Test Api Silex #
+
+## Installation ##
 
 Installation of dependencies with composers
 
