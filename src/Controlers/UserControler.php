@@ -8,7 +8,8 @@ class UserControler{
 
     public function getAllUsersAction(Application $app)
     {
-        return "toto";
+        $users=$app["DAOUser"]->getAll();
+        return json_encode($users);
     }
 
 };

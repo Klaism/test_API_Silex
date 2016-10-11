@@ -2,10 +2,12 @@
 
 namespace TestApi\Models;
 
+use JsonSerializable;
+
 /**
- * Class User 
+ * Class User
  */
-class User
+class User implements JsonSerializable
 {
     protected $id;
     protected $name;
@@ -15,6 +17,18 @@ class User
     public function __construct($name,$email){
         $this->name=$name;
         $this->email=$email;
+    }
+    
+    /**
+     * Serialize user to json
+     */
+    public function JsonSerialize(){
+        return[
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'email' => $this->getEmail(),
+            'age' => $this->getAge()
+        ];
     }
 
     /**
