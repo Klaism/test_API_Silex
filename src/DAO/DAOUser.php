@@ -72,4 +72,15 @@ class DAOUser
         return $user;
     }
 
+    /**
+     * deleteUser()
+     * delete a user
+     * @param  int $id the id of the user
+     */
+    public function deleteUser($id){
+        $sql="DELETE from User where id=?";
+        $statementUser=$this->app["connection"]->prepare($sql);
+        $statementUser->execute([$id]);
+    }
+
 }

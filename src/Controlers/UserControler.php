@@ -27,6 +27,9 @@ class UserControler{
     public function getUserAction(Application $app, $id)
     {
         $user=$app["DAOUser"]->findOneById($id);
+        if( $user->getId() == null ){
+            return $app->json('User not found',404);
+        }
         return $app->json($user);
     }
 
@@ -52,6 +55,25 @@ class UserControler{
         }
         $app["DAOUser"]->createUser($user);
         return $app->json($user);
+    }
+
+    /**
+     * Controler to delete an user by his id
+     * @param  Application $app silex application
+     * @param  int      $id  the id of the user
+     * @return json           a message confirming that the user has been deleted
+     */
+    public function deleteUserAction(Application $app, $id)
+    {
+        $user=$app["DAOUser"]->findOneById($id);
+        if( $user->getId() == null ){
+            return $app->json('User not found',404);
+        }
+
+        $app["DAOUser"]->deleteUser($id);
+
+        return $app->json('User deleted:'.$id,204);
+
     }
 
 };
