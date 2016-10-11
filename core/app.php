@@ -19,3 +19,5 @@ catch(PDOException $e){
     ));
     exit();
 }
+
+require_once __DIR__.'/route.php';
