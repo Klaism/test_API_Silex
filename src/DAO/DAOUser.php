@@ -37,4 +37,21 @@ class DAOUser
         return $res;
     }
 
+    /**
+     * findOneById()
+     * get one user by id
+     * @param  int $id id of user
+     * @return User     User with id = $id
+     */
+    public function findOneById($id){
+        $sql="SELECT * FROM User WHERE id=?";
+        $statementUser=$this->app["connection"]->prepare($sql);
+        $statementUser->execute([$id]);
+        $row=$statementUser->fetch();
+        $user=new User($row["name"],$row["email"]);
+        $user->setId($row["id"]);
+        $user->setAge($row["age"]);
+        return $user;
+    }
+
 }
