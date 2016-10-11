@@ -82,5 +82,28 @@ class DAOUser
         $statementUser=$this->app["connection"]->prepare($sql);
         $statementUser->execute([$id]);
     }
+    /**
+     * updateUser()
+     * update a user
+     * @param  User   $user the user that you want to update
+     * @return User       The user updated
+     */
+    public function updateUser(User $user){
+        $sql="
+            UPDATE User
+            SET
+            name = ?,
+            email = ?,
+            age = ?
+            WHERE id=?";
+            $statementUser=$this->app["connection"]->prepare($sql);
+            $statementUser->execute(array(
+                $user->getName(),
+                $user->getEmail(),
+                $user->getAge(),
+                $user->getId()
+            ));
+        return $user;
+    }
 
 }

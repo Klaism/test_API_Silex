@@ -76,4 +76,32 @@ class UserControler{
 
     }
 
+    /**
+     * editUserActioon()
+     * Controler to update an user by his id
+     * @param  Request     $request put request with user informations
+     * @param  Application $app     silex application
+     * @param  int      $id      the id of the user
+     * @return  Application              silex application
+     */
+    public function editUserAction(Request $request ,Application $app, $id)
+    {
+        $user=$app["DAOUser"]->findOneById($id);
+        if( $user->getId() == null ){
+            return $app->json('User not found',404);
+        }
+        if($request->request->has('name')){
+            $user->setName($request->request->get('name'));
+        }
+        if($request->request->has('email')){
+            $user->setEmail($request->request->get('email'));
+        }
+        if($request->request->has('age')){
+            $user->setAge($request->request->get('age'));
+        }
+        $user=$app["DAOUser"]->updateUser($user);
+
+        return $app->json($user);
+    }
+
 };
