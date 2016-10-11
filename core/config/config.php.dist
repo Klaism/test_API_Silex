@@ -1,0 +1,10 @@
+<?php
+//Copy this file as config.php and change the informations of the database
+$app["config"] = array(
+    "db" => array(
+        'USER' => "toto",
+        'PASSWD' => "mypassword",
+        'SERVER' => "localhost",
+        'BASE' => "dbtoto"
+    )
+) ;
