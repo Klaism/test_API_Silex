@@ -12,6 +12,8 @@ Copy of config files
 
 Now you only have to change the informations given to the database into the file "core/config/config.php".
 
+In order to install everything, make sure to adapt the file ".htaccess".
+
 ## SQL ##
 
 In order to have the correct database, you have to execute the SQL script from "sql/user.sql".
